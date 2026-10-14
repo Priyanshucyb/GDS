@@ -1,0 +1,102 @@
+import { motion } from 'framer-motion'
+import { ArrowRight, MessageCircle, MessageSquareText, FileStack, HandHelping, Eye, ShieldCheck, Headphones, ListChecks, CreditCard, Printer, Plane, Sparkles, CheckCircle2, Clock3, MapPin } from 'lucide-react'
+import Btn from '../components/Btn'
+import Reveal from '../components/Reveal'
+import FAQ from '../components/FAQ'
+import ServiceCard from '../components/ServiceCard'
+import { services, faqs } from '../data/content'
+import { site } from '../data/site'
+import { waLink, useSeo } from '../lib/utils'
+
+const floaters = [
+  { Icon: CreditCard, t: 'PAN Card Assistance', s: 'New application · Correction · Reprint', cls: 'left-0 top-5', d: 0 },
+  { Icon: Printer, t: 'Print, Scan & Copy', s: 'Everyday documents, made simple', cls: 'right-0 top-36', d: 0.8 },
+  { Icon: Plane, t: 'Passport Assistance', s: 'Forms · Checklist · Appointment', cls: 'left-8 bottom-1', d: 1.6 },
+]
+const why = [
+  { Icon: ListChecks, t: 'Clear guidance', d: 'Know which documents to prepare before you begin.' },
+  { Icon: Eye, t: 'Transparent process', d: 'We explain our service charges separately from official fees.' },
+  { Icon: ShieldCheck, t: 'Privacy-minded', d: 'Share only the information needed for your specific task.' },
+  { Icon: Headphones, t: 'Human support', d: 'Get help understanding forms, steps and portal requirements.' },
+]
+const steps = [
+  { Icon: FileStack, t: 'Choose your service', d: 'Explore the service list and open the details for your requirement.' },
+  { Icon: MessageSquareText, t: 'Tell us what you need', d: 'Message us on WhatsApp so we can confirm the next steps.' },
+  { Icon: HandHelping, t: 'Move forward confidently', d: 'We guide you through documents and the relevant official portal.' },
+]
+
+export default function Home() {
+  useSeo('Garg Digital Services | Online applications & documentation help in Rishikesh', 'Garg Digital Services in Rishikesh helps with online applications, documentation, printing and everyday digital services. Enquire on WhatsApp.')
+  return (
+    <>
+      <section className="hero-bg hero-premium relative isolate overflow-hidden text-white">
+        <div className="grid-lines absolute inset-0" aria-hidden />
+        <div className="hero-orb hero-orb-one" aria-hidden />
+        <div className="hero-orb hero-orb-two" aria-hidden />
+        <div className="container-x relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_.95fr] lg:gap-8 lg:py-24">
+          <div className="relative z-10">
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .55 }} className="hero-eyebrow">
+              <span className="hero-eyebrow-dot" /> YOUR LOCAL DIGITAL ASSISTANCE DESK
+            </motion.div>
+            <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, delay: .08 }} className="mt-6 max-w-2xl text-4xl font-bold leading-[1.04] tracking-[-.045em] text-white sm:text-5xl lg:text-[3.65rem]">
+              Less paperwork stress.<br /><span className="hero-gradient-text">More things done.</span>
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .6, delay: .17 }} className="mt-6 max-w-xl text-base leading-7 text-slate-200 sm:text-lg sm:leading-8">
+              From online applications and document preparation to everyday digital tasks, get clear guidance and friendly support in one place.
+            </motion.p>
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .6, delay: .25 }} className="mt-8 flex flex-wrap gap-3">
+              <Btn to="/services" variant="light" magnetic>Explore services <ArrowRight className="h-4 w-4" aria-hidden /></Btn>
+              <Btn href={waLink()} variant="ghost" magnetic><MessageCircle className="h-4 w-4" aria-hidden /> Talk to us</Btn>
+            </motion.div>
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-sm text-slate-300">
+              <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-cyan-300" /> Clear next steps</span>
+              <span className="inline-flex items-center gap-2"><Clock3 className="h-4 w-4 text-cyan-300" /> Convenient support</span>
+              <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-cyan-300" /> {site.city}</span>
+            </div>
+          </div>
+          <div className="hero-visual relative mx-auto h-[340px] w-full max-w-[500px] sm:h-[390px] lg:h-[430px]" aria-label="Examples of digital services">
+            <div className="hero-visual-glow" />
+            <div className="hero-image-frame">
+              <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1000&q=85" alt="Documents being organised for an online application" fetchPriority="high" />
+              <div className="hero-image-shade" />
+              <div className="hero-image-caption"><span className="hero-caption-icon"><Sparkles className="h-4 w-4" /></span><span><b>Digital tasks, made simpler</b><small>Helpful guidance from start to finish</small></span></div>
+            </div>
+            {floaters.map(({ Icon, t, s, cls, d }) => (
+              <motion.div key={t} initial={{ opacity: 0, scale: .92, y: 12 }} animate={{ opacity: 1, scale: 1, y: [0, -7, 0] }}
+                transition={{ opacity: { delay: .25 + d / 2 }, scale: { delay: .25 + d / 2 }, y: { duration: 5, repeat: Infinity, delay: d, ease: 'easeInOut' } }}
+                className={`hero-service-float absolute flex items-center gap-3 ${cls}`}>
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-cyan-300/15 text-cyan-200"><Icon className="h-5 w-5" /></span>
+                <span><span className="block text-sm font-semibold text-white">{t}</span><span className="mt-1 block text-xs leading-4 text-slate-300">{s}</span></span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        <div className="container-x relative pb-8 sm:pb-10"><div className="hero-bottom-line" /></div>
+      </section>
+
+      <section className="container-x py-16 sm:py-20">
+        <div className="section-heading-row">
+          <Reveal><span className="section-kicker">POPULAR PICKS</span><h2 className="mt-3 text-3xl font-bold sm:text-4xl">Everyday services, <span className="text-royal">all in one place.</span></h2><p className="mt-3 max-w-2xl leading-relaxed">Start with the services people commonly need. Each service page explains the basics, documents and how to get assistance.</p></Reveal>
+          <div className="hidden sm:block"><Btn to="/services" variant="outline">Browse all services <ArrowRight className="h-4 w-4" aria-hidden /></Btn></div>
+        </div>
+        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{services.slice(0, 6).map((s, i) => <ServiceCard key={s.slug} s={s} i={i} />)}</div>
+        <div className="mt-8 sm:hidden"><Btn to="/services" variant="outline">Browse all services <ArrowRight className="h-4 w-4" aria-hidden /></Btn></div>
+      </section>
+
+      <section className="why-section py-16 sm:py-20"><div className="container-x">
+        <Reveal><span className="section-kicker">THE GDS DIFFERENCE</span><h2 className="mt-3 text-3xl font-bold sm:text-4xl">Helpful by design. <span className="text-royal">Clear at every step.</span></h2><p className="mt-3 max-w-2xl leading-relaxed">Online processes can feel confusing. We make the next step easier to understand—without overpromising outcomes.</p></Reveal>
+        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{why.map(({ Icon, t, d }, i) => <Reveal key={t} delay={i * .06} className="why-card"><span className="why-icon"><Icon className="h-6 w-6" aria-hidden /></span><h3 className="mt-5 text-lg font-semibold">{t}</h3><p className="mt-2 text-sm leading-relaxed">{d}</p></Reveal>)}</div>
+      </div></section>
+
+      <section className="container-x py-16 sm:py-20"><Reveal><span className="section-kicker">SIMPLE PROCESS</span><h2 className="mt-3 text-3xl font-bold sm:text-4xl">From question to next step.</h2><p className="mt-3 max-w-xl leading-relaxed">No guesswork. Tell us what you need and we will help you understand the process.</p></Reveal>
+        <ol className="process-grid mt-10">{steps.map(({ Icon, t, d }, i) => <Reveal as="li" key={t} delay={i * .08} className="process-card"><span className="process-number">0{i + 1}</span><span className="process-icon"><Icon className="h-6 w-6" aria-hidden /></span><h3 className="mt-5 text-lg font-semibold">{t}</h3><p className="mt-2 text-sm leading-relaxed">{d}</p></Reveal>)}</ol>
+      </section>
+
+      <section className="about-band py-14 sm:py-16"><div className="container-x grid items-center gap-7 md:grid-cols-[.9fr_1.1fr]"><Reveal><span className="section-kicker section-kicker-light">LOCAL SUPPORT, HUMAN HELP</span><h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">A local digital services desk in {site.city}.</h2></Reveal><Reveal delay={.1}><p className="leading-relaxed text-slate-200">Garg Digital Services helps people navigate online applications, documents and everyday digital tasks with less confusion and clearer next steps.</p><p className="mt-4 rounded-2xl border border-white/15 bg-white/[.06] p-4 text-sm leading-relaxed text-slate-300">We are a private service provider, not a government department. Final decisions, fees and timelines are set by the relevant official authority.</p></Reveal></div></section>
+
+      <section className="container-x max-w-3xl py-16 sm:py-20"><Reveal><span className="section-kicker">GOOD TO KNOW</span><h2 className="mb-7 mt-3 text-3xl font-bold sm:text-4xl">Frequently asked questions</h2></Reveal><FAQ items={faqs} /></section>
+
+      <section className="container-x pb-16 sm:pb-20"><div className="cta-panel"><div className="cta-glow" /><div className="relative z-10"><span className="section-kicker section-kicker-light">LET'S GET STARTED</span><h2 className="mx-auto mt-3 max-w-2xl text-3xl font-bold text-white sm:text-4xl">Not sure which service you need?</h2><p className="mx-auto mt-3 max-w-xl leading-relaxed text-slate-200">Tell us what you are trying to do. We will help you figure out the right next step.</p><Btn href={waLink()} variant="whatsapp" magnetic className="mt-7"><MessageCircle className="h-4 w-4" aria-hidden /> Chat on WhatsApp</Btn></div></div></section>
+    </>
+  )
+}

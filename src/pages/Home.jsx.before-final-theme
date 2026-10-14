@@ -1,0 +1,233 @@
+import { motion } from 'framer-motion'
+import {
+  ArrowRight, ArrowUpRight, Search, MessageCircle,
+  CreditCard, Printer, Plane, FileText, ShieldCheck,
+  CheckCircle2, ChevronRight
+} from 'lucide-react'
+import Btn from '../components/Btn'
+import Reveal from '../components/Reveal'
+import ServiceCard from '../components/ServiceCard'
+import FAQ from '../components/FAQ'
+import { services, faqs } from '../data/content'
+import { site } from '../data/site'
+import { waLink, useSeo } from '../lib/utils'
+
+const categories = [
+  { title: 'PAN Card', icon: CreditCard, description: 'New applications & corrections' },
+  { title: 'Print & Copy', icon: Printer, description: 'Printing, scanning & copies' },
+  { title: 'Passport', icon: Plane, description: 'Application guidance' },
+  { title: 'Online Forms', icon: FileText, description: 'Help with digital applications' },
+]
+
+const benefits = [
+  { icon: ShieldCheck, title: 'Clear information', text: 'Know what documents and details you may need.' },
+  { icon: MessageCircle, title: 'Direct assistance', text: 'Discuss your requirement with our team.' },
+  { icon: CheckCircle2, title: 'Guided process', text: 'Understand the next steps before proceeding.' },
+]
+
+export default function Home() {
+  useSeo(
+    'Garg Digital Services | Digital services made simple',
+    'Explore PAN card assistance, printing, passport guidance, online forms and everyday digital services.'
+  )
+
+  return (
+    <main className="gds-market">
+      <section className="market-hero">
+        <div className="market-hero-inner container-x">
+          <motion.div
+            className="market-copy"
+            initial={{ opacity: 0, x: -18 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.55 }}
+          >
+            <div className="market-pill">
+              <span /> YOUR EVERYDAY DIGITAL HELPER
+            </div>
+
+            <h1>
+              Need it done?
+              <br />
+              <span>Start right here.</span>
+            </h1>
+
+            <p>
+              From PAN card assistance to printing and online forms,
+              find everyday digital services in one convenient place.
+            </p>
+
+            <div className="market-actions">
+              <Btn to="/services" variant="primary" className="market-button">
+                Find a service <ArrowRight size={18} />
+              </Btn>
+              <Btn href={waLink()} variant="outline" className="market-whatsapp">
+                <MessageCircle size={17} /> Ask us on WhatsApp
+              </Btn>
+            </div>
+
+            <div className="market-assurance">
+              <CheckCircle2 size={17} />
+              <span>Clear guidance</span>
+              <span className="market-dot">•</span>
+              <span>Helpful support</span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="market-photo-area"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.12 }}
+          >
+            <div className="market-main-photo">
+              <img
+                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1100&q=85"
+                alt="Documents and paperwork ready to be organised"
+                fetchPriority="high"
+              />
+              <div className="market-photo-caption">
+                <span>EVERYDAY TASKS, MADE EASIER</span>
+                <ArrowUpRight size={20} />
+              </div>
+            </div>
+
+            <a className="market-mini-card" href="/services/pan-card">
+              <span className="market-mini-icon"><CreditCard size={22} /></span>
+              <span>
+                <strong>PAN Card Assistance</strong>
+                <small>Apply, correct or reprint</small>
+              </span>
+              <ChevronRight size={19} />
+            </a>
+
+            <div className="market-roundel">
+              <span>GDS</span>
+              <small>HERE TO<br />HELP</small>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="market-hero-footer container-x">
+          <span>APPLICATIONS</span>
+          <span className="market-footer-line" />
+          <span>DOCUMENTS</span>
+          <span className="market-footer-line" />
+          <span>DIGITAL ASSISTANCE</span>
+        </div>
+      </section>
+
+      <section className="market-category-section">
+        <div className="container-x">
+          <div className="market-section-heading">
+            <div>
+              <span className="market-overline">BROWSE BY CATEGORY</span>
+              <h2>What can we help<br />you with?</h2>
+            </div>
+            <p>Choose a category to explore available services and find the right next step.</p>
+          </div>
+
+          <div className="market-category-grid">
+            {categories.map(({ title, icon: Icon, description }, i) => (
+              <a
+                href="/services"
+                className={`market-category market-category-${i + 1}`}
+                key={title}
+              >
+                <span className="market-category-icon"><Icon size={23} /></span>
+                <span className="market-category-copy">
+                  <strong>{title}</strong>
+                  <small>{description}</small>
+                </span>
+                <ArrowUpRight size={19} className="market-category-arrow" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="market-popular container-x">
+        <div className="market-section-heading">
+          <div>
+            <span className="market-overline">POPULAR RIGHT NOW</span>
+            <h2>Services people<br />come here for.</h2>
+          </div>
+          <Btn to="/services" variant="outline" className="market-view-all">
+            All services <ArrowRight size={17} />
+          </Btn>
+        </div>
+
+        <div className="market-service-grid">
+          {services.slice(0, 6).map((s, i) => (
+            <div className="market-service-item" key={s.slug}>
+              <ServiceCard s={s} i={i} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="market-benefits">
+        <div className="container-x">
+          <div className="market-section-heading">
+            <div>
+              <span className="market-overline">THE GDS DIFFERENCE</span>
+              <h2>Support that keeps<br />things simple.</h2>
+            </div>
+            <p>We help you understand the process so you can make informed decisions about your application or service.</p>
+          </div>
+
+          <div className="market-benefit-grid">
+            {benefits.map(({ icon: Icon, title, text }) => (
+              <article className="market-benefit" key={title}>
+                <span className="market-benefit-icon"><Icon size={23} /></span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="market-steps-section container-x">
+        <div className="market-steps-copy">
+          <span className="market-overline">GETTING STARTED</span>
+          <h2>Three easy steps<br />to get moving.</h2>
+          <p>Not sure which service you need? Start with a message and we will help clarify the process.</p>
+          <Btn href={waLink()} variant="primary" className="market-button">
+            Talk to our team <ArrowUpRight size={18} />
+          </Btn>
+        </div>
+
+        <div className="market-step-list">
+          <article><span>01</span><div><h3>Pick your service</h3><p>Browse the available services and choose your requirement.</p></div></article>
+          <article><span>02</span><div><h3>Confirm the details</h3><p>Ask about documents, process and applicable assistance fees.</p></div></article>
+          <article><span>03</span><div><h3>Know your next step</h3><p>Get guidance on how to proceed through the relevant official channel.</p></div></article>
+        </div>
+      </section>
+
+      <section className="market-contact">
+        <div className="container-x market-contact-inner">
+          <div>
+            <span className="market-overline">LET'S MAKE IT EASIER</span>
+            <h2>Your next task<br />starts with a message.</h2>
+            <p>Tell us what you need help with. We'll help you figure out where to start.</p>
+          </div>
+          <Btn href={waLink()} variant="primary" className="market-contact-button">
+            <MessageCircle size={19} /> Enquire on WhatsApp <ArrowUpRight size={19} />
+          </Btn>
+        </div>
+      </section>
+
+      {faqs?.length > 0 && (
+        <section className="market-faq container-x">
+          <div className="market-section-heading">
+            <div>
+              <span className="market-overline">NEED TO KNOW MORE?</span>
+              <h2>Frequently asked<br />questions.</h2>
+            </div>
+          </div>
+          <FAQ items={faqs} />
+        </section>
+      )}
+    </main>
+  )
+}
