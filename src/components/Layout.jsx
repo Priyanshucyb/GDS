@@ -10,7 +10,7 @@ const links = [{ to: '/', label: 'Home' }, { to: '/services', label: 'Services' 
 
 export function Logo({ light = false }) {
   return <Link to="/" className={`gds-brand ${light ? 'gds-brand-light' : ''}`} aria-label={`${site.name} home`}>
-    <span className="gds-brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/><path d="M30 16a12 12 0 1 0 3 12h-9"/></svg><b>G</b></span>
+    <span className="gds-brand-mark" aria-hidden="true"><img src="/gds-logo.jpeg" alt="" /></span>
     <span className="gds-brand-copy"><strong>Garg Digital Services</strong><small>Common Services Center</small></span>
   </Link>
 }
