@@ -6,15 +6,15 @@ import { categories } from '../data/content'
 import { waLink } from '../lib/utils'
 import Btn from './Btn'
 
-export default function ServiceCard({ s, i = 0 }) {
+export default function ServiceCard({ s, i = 0, imageOverride, catalog = false }) {
   const Icon = icons[s.icon]
   const cat = categories.find((c) => c.id === s.cat)?.label || 'Digital services'
   return (
     <motion.article layout initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: .97 }}
       viewport={{ once: true, margin: '-35px' }} transition={{ duration: .4, delay: (i % 3) * .06 }}
-      whileHover={{ y: -5 }} className="service-card group flex flex-col overflow-hidden">
+      whileHover={{ y: -5 }} className={`service-card group flex flex-col overflow-hidden ${catalog ? 'catalog-service-card' : ''}`}>
       <Link to={`/services/${s.slug}`} className="service-card-media relative block h-48 overflow-hidden" aria-label={`View ${s.title}`}>
-        {s.image ? <img src={s.image} alt={`${s.title}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" /> : <div className="service-image-fallback h-full w-full" />}
+        {(imageOverride || s.image) ? <img src={imageOverride || s.image} alt={`${s.title}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" /> : <div className="service-image-fallback h-full w-full" />}
         <div className="service-image-overlay absolute inset-0" />
         <span className="service-category absolute left-4 top-4">{cat}</span>
         <span className="service-icon-bubble absolute bottom-4 left-4"><Icon className="h-5 w-5" aria-hidden /></span>

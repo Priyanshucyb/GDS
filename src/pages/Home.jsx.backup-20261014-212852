@@ -1,0 +1,275 @@
+import { motion } from 'framer-motion'
+import {
+  ArrowRight, ArrowUpRight, MessageCircle, CreditCard,
+  Printer, FileText, Search, ShieldCheck, Sparkles,
+  CheckCircle2, Zap, Globe2
+} from 'lucide-react'
+import ServiceCard from '../components/ServiceCard'
+import { services } from '../data/content'
+import { waLink, useSeo } from '../lib/utils'
+
+const ease = [0.22, 1, 0.36, 1]
+
+const features = [
+  { icon: CreditCard, number: '01', title: 'PAN Card', desc: 'Applications & corrections', color: 'violet', href: '/services/pan-card' },
+  { icon: ShieldCheck, number: '02', title: 'Document Support', desc: 'Guidance for everyday needs', color: 'cyan', href: '/services' },
+  { icon: FileText, number: '03', title: 'Online Forms', desc: 'Application assistance', color: 'pink', href: '/services' },
+  { icon: Printer, number: '04', title: 'Print & Scan', desc: 'Documents, made easy', color: 'blue', href: '/services' },
+]
+
+const shortcuts = [
+  { title: 'PAN Card', desc: 'Apply, correct or reprint', icon: CreditCard },
+  { title: 'Print & Scan', desc: 'Everyday document support', icon: Printer },
+  { title: 'Online Forms', desc: 'Help with digital applications', icon: FileText },
+]
+
+const reveal = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease } },
+}
+
+export default function Home() {
+  useSeo(
+    'Garg Digital Services | Everyday digital assistance',
+    'Explore PAN card assistance, online applications, printing and everyday digital services.'
+  )
+
+  return (
+    <main className="gds-next">
+      <section className="gx-shell">
+        <div className="gx-aurora gx-aurora-one" />
+        <div className="gx-aurora gx-aurora-two" />
+        <div className="gx-aurora gx-aurora-three" />
+        <div className="gx-grain" />
+
+        <motion.header
+          className="gx-nav"
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65 }}
+        >
+          <a href="/" className="gx-brand" aria-label="Garg Digital Services home">
+            <span className="gx-brand-mark">G<span>.</span></span>
+            <span className="gx-brand-copy">
+              <strong>GARG DIGITAL</strong>
+              <small>SERVICES</small>
+            </span>
+          </a>
+
+          <nav className="gx-nav-links" aria-label="Main navigation">
+            <a href="/services">Services</a>
+            <a href="/about">About us</a>
+            <a href="/faq">FAQs</a>
+          </nav>
+
+          <a className="gx-nav-cta" href={waLink()}>
+            Let's talk <ArrowUpRight size={16} />
+          </a>
+        </motion.header>
+
+        <div className="gx-hero">
+          <motion.div
+            className="gx-hero-copy"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
+            }}
+          >
+            <motion.div className="gx-pill" variants={reveal}>
+              <span className="gx-live-dot" />
+              YOUR EVERYDAY DIGITAL PARTNER
+              <Sparkles size={14} />
+            </motion.div>
+
+            <motion.h1 variants={reveal}>
+              Life gets busy.
+              <br />
+              <span className="gx-gradient-text">We make it</span>
+              <br />
+              <span className="gx-outline-text">simpler.</span>
+            </motion.h1>
+
+            <motion.p className="gx-hero-description" variants={reveal}>
+              From PAN card assistance to online applications and document services,
+              get clear guidance for the tasks that matter to you.
+            </motion.p>
+
+            <motion.div className="gx-actions" variants={reveal}>
+              <a className="gx-btn-primary" href="/services">
+                Explore services <ArrowRight size={18} />
+              </a>
+              <a className="gx-btn-glass" href={waLink()}>
+                <MessageCircle size={18} /> Talk to us
+              </a>
+            </motion.div>
+
+            <motion.div className="gx-proof" variants={reveal}>
+              <span className="gx-proof-icon"><CheckCircle2 size={16} /></span>
+              <span>Clear guidance</span>
+              <i />
+              <span>Convenient support</span>
+            </motion.div>
+          </motion.div>
+
+          <div className="gx-visual" aria-label="Explore our digital services">
+            <div className="gx-visual-ring gx-ring-one" />
+            <div className="gx-visual-ring gx-ring-two" />
+            <div className="gx-visual-core">
+              <div className="gx-core-orb">
+                <Globe2 size={48} strokeWidth={1.2} />
+              </div>
+              <span className="gx-core-label">YOUR DIGITAL WORLD</span>
+            </div>
+
+            <motion.div
+              className="gx-stat-card gx-stat-one"
+              animate={{ y: [0, -9, 0], rotate: [0, -1, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <span className="gx-stat-icon gx-violet"><Zap size={19} /></span>
+              <span className="gx-stat-caption">THE EXPERIENCE</span>
+              <strong>Simple<span>.</span></strong>
+              <small>Less confusion, more clarity</small>
+            </motion.div>
+
+            <motion.div
+              className="gx-stat-card gx-stat-two"
+              animate={{ y: [0, 8, 0], rotate: [0, 1, 0] }}
+              transition={{ duration: 5.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+            >
+              <span className="gx-stat-icon gx-cyan"><ShieldCheck size={19} /></span>
+              <span className="gx-stat-caption">OUR APPROACH</span>
+              <strong>Guided<span>.</span></strong>
+              <small>Know your next step</small>
+            </motion.div>
+
+            <div className="gx-mini-tag gx-mini-top">
+              <span className="gx-mini-pulse" /> Everyday assistance
+            </div>
+            <div className="gx-mini-tag gx-mini-bottom">
+              <Sparkles size={14} /> Made for you
+            </div>
+          </div>
+        </div>
+
+        <div className="gx-bottom-bar">
+          <span>GOOD SERVICES. CLEAR STEPS.</span>
+          <span className="gx-bottom-center"><i /> DIGITAL HELP, WITHOUT THE HASSLE</span>
+          <a href="/services">DISCOVER WHAT WE DO <ArrowRight size={13} /></a>
+        </div>
+      </section>
+
+      <section className="gx-services-section">
+        <motion.div
+          className="gx-section-heading"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={reveal}
+        >
+          <div>
+            <span className="gx-kicker"><span /> SERVICES THAT FIT YOUR DAY</span>
+            <h2>What can we help<br />you <span>get done?</span></h2>
+          </div>
+          <p>Everyday tasks don't need to feel complicated. Find the service you need and get started with confidence.</p>
+        </motion.div>
+
+        <div className="gx-feature-grid">
+          {features.map(({ icon: Icon, number, title, desc, color, href }, i) => (
+            <motion.a
+              href={href}
+              className={`gx-feature-card gx-feature-${color}`}
+              key={title}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.09 }}
+              whileHover={{ y: -7, transition: { duration: 0.22 } }}
+            >
+              <div className="gx-feature-top">
+                <span className="gx-feature-icon"><Icon size={23} /></span>
+                <span className="gx-feature-number">{number} / 04</span>
+              </div>
+              <div>
+                <h3>{title}</h3>
+                <p>{desc}</p>
+              </div>
+              <span className="gx-feature-arrow"><ArrowUpRight size={18} /></span>
+            </motion.a>
+          ))}
+        </div>
+
+        <div className="gx-shortcut-heading">
+          <div>
+            <span className="gx-kicker"><span /> QUICK ACCESS</span>
+            <h2>Popular <span>right now.</span></h2>
+          </div>
+          <a href="/services" className="gx-text-link">All services <ArrowRight size={16} /></a>
+        </div>
+
+        <div className="gx-shortcut-grid">
+          {shortcuts.map(({ title, desc, icon: Icon }, i) => (
+            <motion.a
+              href="/services"
+              className="gx-shortcut-card"
+              key={title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: i * 0.08 }}
+              whileHover={{ y: -4 }}
+            >
+              <span className="gx-shortcut-icon"><Icon size={21} /></span>
+              <span className="gx-shortcut-copy"><strong>{title}</strong><small>{desc}</small></span>
+              <ArrowUpRight className="gx-shortcut-arrow" size={18} />
+            </motion.a>
+          ))}
+        </div>
+
+        <div className="gx-catalog-heading">
+          <div>
+            <span className="gx-kicker"><span /> EXPLORE OUR CATALOG</span>
+            <h2>More ways we can <span>help.</span></h2>
+          </div>
+          <p>Explore our available services and choose what works for you.</p>
+        </div>
+
+        <div className="gx-catalog-grid">
+          {services.slice(0, 3).map((s, i) => (
+            <motion.div
+              key={s.slug}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ delay: i * 0.08 }}
+            >
+              <ServiceCard s={s} i={i} />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="gx-contact-wrap">
+        <div className="gx-contact-card">
+          <div className="gx-contact-glow" />
+          <div className="gx-contact-copy">
+            <span className="gx-kicker gx-kicker-light"><span /> ONE MESSAGE AWAY</span>
+            <h2>Let's make your<br /><span>next step easier.</span></h2>
+            <p>Tell us what you need. We'll help you understand the next steps and confirm the applicable process and fees.</p>
+          </div>
+          <a href={waLink()} className="gx-contact-button">
+            <MessageCircle size={19} /> Enquire on WhatsApp <ArrowUpRight size={18} />
+          </a>
+          <div className="gx-contact-decoration">G.</div>
+        </div>
+        <footer className="gx-footer">
+          <a href="/" className="gx-footer-brand">GARG DIGITAL SERVICES<span>.</span></a>
+          <span>Everyday digital assistance, made simpler.</span>
+          <a href="/services">Explore services <ArrowRight size={14} /></a>
+        </footer>
+      </section>
+    </main>
+  )
+}
