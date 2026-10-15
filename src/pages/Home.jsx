@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, MessageCircle, MapPin, CreditCard, CarFront, Printer, FileText, ShieldCheck, Waves, Laptop, Phone, Mail, ChevronLeft, ChevronRight, Banknote, ReceiptText, Camera, IdCard, GraduationCap, BriefcaseBusiness } from 'lucide-react'
 import { services } from '../data/content'
@@ -38,10 +38,18 @@ const lower = [
 const wa = (text) => `${waLink()}${waLink().includes('?') ? '&' : '?'}text=${encodeURIComponent(text)}`
 
 export default function Home(){
- const [slide,setSlide]=useState(0)
+ const posterWindowRef = useRef(null)
  const [selectedPoster,setSelectedPoster]=useState(null)
  useSeo('Garg Digital Services | Common Services Centre, Rishikesh','Digital and citizen services, document assistance, online applications, insurance, rafting and rental vehicle enquiries in Indra Nagar, Rishikesh.')
- const move=(n)=>setSlide((slide+n+posters.length)%posters.length)
+ const move=(direction)=>{
+  const viewport=posterWindowRef.current
+  if(!viewport) return
+  const card=viewport.querySelector('.gref-poster')
+  if(!card) return
+  const styles=window.getComputedStyle(viewport.querySelector('.gref-poster-track'))
+  const gap=parseFloat(styles.columnGap || styles.gap) || 10
+  viewport.scrollBy({left:direction*(card.getBoundingClientRect().width+gap),behavior:'smooth'})
+ }
  return <div className="gref">
   <section className="gref-hero">
    <div className="gref-scenic"><div className="gref-mountain gref-mountain-a"/><div className="gref-mountain gref-mountain-b"/><div className="gref-river"/></div>
@@ -101,7 +109,7 @@ export default function Home(){
 
   <section className="gref-featured">
    <div className="gref-featured-head"><div><h2><span>✣</span> Our Featured Services</h2><p>All the services you need — all in one place.</p></div><a href="/services">View All Services <ArrowRight size={14}/></a><div className="gref-slide-controls"><button onClick={()=>move(-1)} aria-label="Previous posters"><ChevronLeft/></button><button onClick={()=>move(1)} aria-label="Next posters"><ChevronRight/></button></div></div>
-   <div className="gref-poster-window"><motion.div className="gref-poster-track" animate={{x:`-${slide* (100/6)}%`}} transition={{type:'spring',stiffness:150,damping:25}}>{posters.map(([title,image],i)=><button type="button" onClick={()=>setSelectedPoster({title,image,index:i+1})} className="gref-poster" key={image} aria-label={`View ${title} poster`}><div><img src={image} alt={title} loading="lazy"/></div><small>{i+1}. {title}</small></button>)}</motion.div></div>
+   <div className="gref-poster-window" ref={posterWindowRef}><div className="gref-poster-track">{posters.map(([title,image],i)=><button type="button" onClick={()=>setSelectedPoster({title,image,index:i+1})} className="gref-poster" key={image} aria-label={`View ${title} poster`}><div><img src={image} alt={title} loading="lazy"/></div><small>{i+1}. {title}</small></button>)}</div></div>
   </section>
 
   <section className="gref-lower-services">{lower.map(([title,desc,Icon])=><a href="/services" key={title}><span><Icon size={20}/></span><div><strong>{title}</strong><small>{desc}</small></div><ArrowUpRight size={14}/></a>)}</section>

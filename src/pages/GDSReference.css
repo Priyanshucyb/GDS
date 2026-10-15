@@ -139,3 +139,12 @@
 .gref-festive-banner { position: relative; display: block !important; width: 100% !important; height: auto !important; min-height: 0 !important; aspect-ratio: auto !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; border-radius: 15px; border: 1px solid #f3d2a4; box-sizing: border-box; background: transparent !important; line-height: 0 !important; }
 .gref-festive-banner img { display: block !important; width: 100% !important; height: auto !important; min-height: 0 !important; max-height: none !important; aspect-ratio: auto !important; object-fit: contain !important; object-position: center; margin: 0 !important; padding: 0 !important; }
 @media (max-width: 700px) { .gref-festive-wide { width: calc(100% - 28px) !important; } .gref-festive-banner { border-radius: 10px; } }
+
+/* Featured services carousel: native touch swipe + bounded scrolling */
+.gref-poster-window{overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.gref-poster-window::-webkit-scrollbar{display:none}
+.gref-poster-track{display:flex;gap:10px;width:max-content;transform:none!important}
+.gref-poster{flex:0 0 calc((min(1460px,100vw - 56px) - 50px)/6);scroll-snap-align:start}
+.gref-poster-window{scroll-snap-type:x proximity}
+@media(max-width:1100px){.gref-poster{flex-basis:calc((min(100vw - 56px,1100px) - 40px)/5)}}
+@media(max-width:700px){.gref-poster{flex-basis:155px}.gref-poster-window{margin-right:-2px;padding-bottom:3px;scroll-snap-type:x mandatory}.gref-poster-track{gap:10px}}
